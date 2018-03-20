@@ -135,6 +135,13 @@ people = [
             'brownEyes': {'trait': 'brownEyes','cTid1': True,'cTid2': True},
             'maleInfertility': {'trait': 'maleInfertility','cTid1': True,'cTid2': True}
         }
+    ),
+    Person(
+        "Peter","male",chromosomes = {
+            'haemophilia': {'trait': 'haemophilia','cTid1': False,'cTid2': True},
+            'brownEyes': {'trait': 'brownEyes','cTid1': False,'cTid2': True},
+            'maleInfertility': {'trait': 'maleInfertility','cTid1': False,'cTid2': False}
+        }
     )
 ]
 
@@ -171,8 +178,9 @@ for trait in traits:
     
 for person in range(len(people)):
     for trait in traits:
-        dbi(db,1,people[person].name,"DO THEY HAVE",traits[trait].name,str(people[0].testFor(traits[trait])))
-        
+        dbi(db,1,people[person].name,"DO THEY HAVE",traits[trait].name,str(people[person].testFor(traits[trait])))
+
+        #dbi(db,1,people[person].calcGenotype(pass))
 # for person in people:
 #     print(str(person.name) + ":")
 #     for trait in traits:
