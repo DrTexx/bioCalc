@@ -7,6 +7,8 @@ db = {'debug_active': True, 'verbosity_level': 3}
 
 dbi(db,3,"Successfully imported dbi!")
 
+"""SCRIPT IS CURRENTLY A BROKEN WIP"""
+
 class Person:
     """
     Test gene inheritance based on different trait activation properties (e.g. linked to x chromosome)
