@@ -23,29 +23,29 @@ class Person:
     def testFor(self,trait):
         if (trait.sexLinked == False): #TEST IF LINKED TO X OR Y, THEN TEST IF DOMINANT, RETURN IF PHENOTYPE IS ACTIVE
             if (trait.dominant):
-                if (self.chromatid1) or (self.chromatid2):
+                if (self.chromosomes[trait.name]['cTid1']) or (self.chromosomes[trait.name]['cTid2']):
                     return True
                 else:
                     return False
             else:
-                if (not self.chromatid1) and (not self.chromatid2):
+                if (not self.chromosomes[trait.name]['cTid1']) and (not self.chromosomes[trait.name]['cTid2']):
                     return True
                 else:
                     return False
         elif (trait.sexLinked == 'x'):
             if (self.gender == 'male'):
-                if (self.chromosomes[trait.name][cTid1]):
+                if (self.chromosomes[trait.name]['cTid1']):
                     return True
                 else:
                     return False
             elif (self.gender == 'female'):
                 if (trait.dominant):
-                    if (self.chromatid1) or (self.cTid2):
+                    if (self.chromosomes[trait.name]['cTid1']) or (self.chromosomes[trait.name]['cTid2']):
                         return True
                     else:
                         return False
                 else:
-                    if (not self.chromatid1) and (not self.cTid2):
+                    if (not self.chromosomes[trait.name]['cTid1']) and (not self.chromosomes[trait.name]['cTid2']):
                         return True
                     else:
                         return False
@@ -54,7 +54,7 @@ class Person:
         elif (trait.sexLinked == 'y'):
             if (self.gender == 'male'):
                 if (trait.dominant):
-                    if (self.chromatid2):
+                    if (self.chromosomes[trait.name]['cTid2']):
                         return True
                     else:
                         return False
@@ -167,11 +167,13 @@ for trait in traits:
     dbi(db,2,"name",str(traits[trait].name))
     dbi(db,2,"sexLinked?:",str(traits[trait].sexLinked))
     dbi(db,2,"dominant?:",str(traits[trait].dominant))
-    
     print(traits[trait])
-    print(people[0].testFor(traits[trait]))
     
-for person in people:
-    print(str(person.name) + ":")
+for person in range(len(people)):
     for trait in traits:
-        print(trait.name,"=",person.testFor(trait),"(",person.calcGenotype(trait.allele),")")
+        dbi(db,1,people[person].name,"DO THEY HAVE",traits[trait].name,str(people[0].testFor(traits[trait])))
+        
+# for person in people:
+#     print(str(person.name) + ":")
+#     for trait in traits:
+#         print(trait.name,"=",person.testFor(trait),"(",person.calcGenotype(trait.allele),")")
