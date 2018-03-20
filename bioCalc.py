@@ -1,14 +1,14 @@
 """
 inheritance script, by Denver
+
+SCRIPT IS CURRENTLY A BROKEN WIP
 """
 
-from lib.dbi import dbi
-db = {'debug_active': True, 'verbosity_level': 3}
+from lib.dbi import dbi # import dbi for debugging
+db = {'debug_active': True, 'verbosity_level': 3} # dictionary for dbi
+dbi(db,3,"Successfully imported dbi!") # test dbi import
 
-dbi(db,3,"Successfully imported dbi!")
-
-"""SCRIPT IS CURRENTLY A BROKEN WIP"""
-
+# define the person class
 class Person:
     """
     Test gene inheritance based on different trait activation properties (e.g. linked to x chromosome)
@@ -22,8 +22,8 @@ class Person:
         #self.chromatid2 = chromatid2
     def testFor(self,trait):
         #TEST IF LINKED TO X OR Y, THEN TEST IF DOMINANT, RETURN IF PHENOTYPE IS ACTIVE
-        if (sexLinked == False):
-            if (dominant):
+        if (trait['sexLinked'] == False):
+            if (trait['dominant']):
                 if (self.chromatid1) or (self.chromatid2):
                     return True
                 else:
@@ -33,7 +33,7 @@ class Person:
                     return True
                 else:
                     return False
-        elif (sexLinked == 'x'):
+        elif (trait['sexLinked'] == 'x'):
             if (self.gender == 'male'):
                 if (self.chromatid1):
                     return True
@@ -52,9 +52,9 @@ class Person:
                         return False
             else:
                 print("Error: Gender invalid (this isn't Tumblr)")
-        elif (sexLinked == 'y'):
+        elif (trait['sexLinked'] == 'y'):
             if (self.gender == 'male'):
-                if (dominant):
+                if (trait['dominant']):
                     if (self.chromatid2):
                         return True
                     else:
@@ -108,68 +108,56 @@ class Phenotype:
         if 'allele' in kwargs: self.allele = kwargs['allele']
 
 #script body
-people = []
-father = Person(
-    "John",
-    "male",
-    chromosomes = [
-        {'trait': 'haemophilia','cTid1': True,'cTid2': False},
-        {'trait': 'brownEyes','cTid1': True,'cTid2': False},
-        {'trait': 'maleInfertility','cTid1': True,'cTid2': False}
-    ]
-#True,False
-)
-people.append(father)
+people = [
+    Person(
+        "John","male",chromosomes = [
+            {'trait': 'haemophilia','cTid1': True,'cTid2': False},
+            {'trait': 'brownEyes','cTid1': True,'cTid2': False},
+            {'trait': 'maleInfertility','cTid1': True,'cTid2': False}
+        ]
+    ),
+    Person(
+        "Jill","female",chromosomes = [
+            {'trait': 'haemophilia','cTid1': False,'cTid2': True},
+            {'trait': 'brownEyes','cTid1': False,'cTid2': True},
+            {'trait': 'maleInfertility','cTid1': False,'cTid2': True}
+        ]
+    ),
+    Person(
+        "Theodore","male",chromosomes = [
+            {'trait': 'haemophilia','cTid1': False,'cTid2': True},
+            {'trait': 'brownEyes','cTid1': False,'cTid2': True},
+            {'trait': 'maleInfertility','cTid1': False,'cTid2': True}
+        ]
+    ),
+    Person(
+        "Kanwal","male",chromosomes = [
+            {'trait': 'haemophilia','cTid1': True,'cTid2': True},
+            {'trait': 'brownEyes','cTid1': True,'cTid2': True},
+            {'trait': 'maleInfertility','cTid1': True,'cTid2': True}
+        ]
+    )
+]
+
+traits = [
+    Phenotype(
+        name='haemophilia',sexLinked='x',dominant=False,allele='h'
+    ),
+    Phenotype(
+        name='brownEyes',sexLinked=False,dominant=True,allele='b'
+    ),
+    Phenotype(
+        name='maleInfertility',sexLinked='y',dominant=True,allele='i'\
+    )
+]
 
 for person in people:
-    print(person)
-    print(person.name)
-    print(person.gender)
-    print(person.chromosomes)
+    dbi(db,3,"root_object",str(type(person)))
+    dbi(db,1,"name",person.name)
+    dbi(db,1,"gender",person.gender)
     for chromosome in person.chromosomes:
-        print(chromosome['trait'],chromosome['cTid1'],chromosome['cTid2'])
-        
-        
-        
+        dbi(db,1,str(chromosome['trait']),str(chromosome['cTid1']),str(chromosome['cTid2']))
 
-
-mother = Person(
-    "Jill",
-    "female",
-    chromosomes = [
-        {'trait': 'haemophilia','cTid1': False,'cTid2': True},
-        {'trait': 'brownEyes','cTid1': False,'cTid2': True},
-        {'trait': 'maleInfertility','cTid1': False,'cTid2': True}
-    ]
-)
-grandpa = Person(
-    "Theodore",
-    "male",
-    [
-        {'trait': 'haemophilia','cTid1': False,'cTid2': True},
-        {'trait': 'brownEyes','cTid1': False,'cTid2': True},
-        {'trait': 'maleInfertility','cTid1': False,'cTid2': True}
-    ]
-)
-kanwal = Person(
-    "Kanwal",
-    "male",
-    [
-        {'trait': 'haemophilia','cTid1': True,'cTid2': True},
-        {'trait': 'brownEyes','cTid1': True,'cTid2': True},
-        {'trait': 'maleInfertility','cTid1': True,'cTid2': True}
-    ]
-)
-people.append(father)
-people.append(mother)
-people.append(grandpa)
-people.append(kanwal)
-
-traits = {
-    'haemophilia': Phenotype(name='haemophilia',sexLinked='x',dominant=False,allele='h'),
-    'brownEyes': Phenotype(name='brownEyes',sexLinked=False,dominant=True,allele='b'),
-    'maleInfertility': Phenotype(name='maleInfertility',sexLinked='y',dominant=True,allele='i')
-}
 
 """
 tempName = raw_input("Person's name: ")
@@ -179,23 +167,17 @@ tempChromatid2 = raw_input("Second chromatid?: ")
 tempPerson = Person(tempName,tempGender,tempChromatid1,tempChromatid2)
 people.append(tempPerson)
 """
-
-for person in people:
-    print("name:",person.name)
-    print("gender:",person.gender)
-    for trait in person.chromosomes:
-        print("cTid1:",trait.cTid1)
-        print("cTid2:",trait.cTid2)
-    print
-print("--------")
 for trait in traits:
-    print("name:",trait.name)
-    print("sexLinked?:",trait.sexLinked)
-    print("dominant?:",trait.dominant)
-print("--------")
+    dbi(db,3,"root_object",str(type(trait)))
+    dbi(db,1,"name",str(trait.name))
+    dbi(db,1,"sexLinked?:",str(trait.sexLinked))
+    dbi(db,1,"dominant?:",str(trait.dominant))
+    
+    print(people[0].testFor(traits[0]))
+    
 for person in people:
     print(str(person.name) + ":")
     for trait in traits:
-        print(trait.name,"=",person.testInheritance(trait.sexLinked,trait.dominant),"(",person.calcGenotype(trait.allele),")")
+        print(trait.name,"=",person.testFor(trait),"(",person.calcGenotype(trait.allele),")")
     print
 raw_input("PRESS <ENTER> TO CONTINUE")
