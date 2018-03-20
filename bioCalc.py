@@ -40,7 +40,7 @@ class Person:
                 else:
                     return False
             elif (self.gender == 'female'):
-                if (dominant):
+                if (trait['dominant']):
                     if (self.chromatid1) or (self.chromatid2):
                         return True
                     else:
@@ -180,4 +180,3 @@ for person in people:
     for trait in traits:
         print(trait.name,"=",person.testFor(trait),"(",person.calcGenotype(trait.allele),")")
     print
-raw_input("PRESS <ENTER> TO CONTINUE")
