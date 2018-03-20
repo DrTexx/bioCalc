@@ -21,9 +21,8 @@ class Person:
         #self.chromatid1 = chromatid1
         #self.chromatid2 = chromatid2
     def testFor(self,trait):
-        #TEST IF LINKED TO X OR Y, THEN TEST IF DOMINANT, RETURN IF PHENOTYPE IS ACTIVE
-        if (trait['sexLinked'] == False):
-            if (trait['dominant']):
+        if (trait.sexLinked == False): #TEST IF LINKED TO X OR Y, THEN TEST IF DOMINANT, RETURN IF PHENOTYPE IS ACTIVE
+            if (trait.dominant):
                 if (self.chromatid1) or (self.chromatid2):
                     return True
                 else:
@@ -33,28 +32,28 @@ class Person:
                     return True
                 else:
                     return False
-        elif (trait['sexLinked'] == 'x'):
+        elif (trait.sexLinked == 'x'):
             if (self.gender == 'male'):
-                if (self.chromatid1):
+                if (self.chromosomes[trait.name][cTid1]):
                     return True
                 else:
                     return False
             elif (self.gender == 'female'):
-                if (trait['dominant']):
-                    if (self.chromatid1) or (self.chromatid2):
+                if (trait.dominant):
+                    if (self.chromatid1) or (self.cTid2):
                         return True
                     else:
                         return False
                 else:
-                    if (not self.chromatid1) and (not self.chromatid2):
+                    if (not self.chromatid1) and (not self.cTid2):
                         return True
                     else:
                         return False
             else:
                 print("Error: Gender invalid (this isn't Tumblr)")
-        elif (trait['sexLinked'] == 'y'):
+        elif (trait.sexLinked == 'y'):
             if (self.gender == 'male'):
-                if (trait['dominant']):
+                if (trait.dominant):
                     if (self.chromatid2):
                         return True
                     else:
@@ -110,53 +109,49 @@ class Phenotype:
 #script body
 people = [
     Person(
-        "John","male",chromosomes = [
-            {'trait': 'haemophilia','cTid1': True,'cTid2': False},
-            {'trait': 'brownEyes','cTid1': True,'cTid2': False},
-            {'trait': 'maleInfertility','cTid1': True,'cTid2': False}
-        ]
+        "John","male",chromosomes = {
+            'haemophilia': {'trait': 'haemophilia','cTid1': True,'cTid2': False},
+            'brownEyes': {'trait': 'brownEyes','cTid1': True,'cTid2': False},
+            'maleInfertility': {'trait': 'maleInfertility','cTid1': True,'cTid2': False}
+        }
     ),
     Person(
-        "Jill","female",chromosomes = [
-            {'trait': 'haemophilia','cTid1': False,'cTid2': True},
-            {'trait': 'brownEyes','cTid1': False,'cTid2': True},
-            {'trait': 'maleInfertility','cTid1': False,'cTid2': True}
-        ]
+        "Jill","female",chromosomes = {
+            'haemophilia': {'trait': 'haemophilia','cTid1': False,'cTid2': True},
+            'brownEyes': {'trait': 'brownEyes','cTid1': False,'cTid2': True},
+            'maleInfertility': {'trait': 'maleInfertility','cTid1': False,'cTid2': True}
+        }
     ),
     Person(
-        "Theodore","male",chromosomes = [
-            {'trait': 'haemophilia','cTid1': False,'cTid2': True},
-            {'trait': 'brownEyes','cTid1': False,'cTid2': True},
-            {'trait': 'maleInfertility','cTid1': False,'cTid2': True}
-        ]
+        "Theodore","male",chromosomes = {
+            'haemophilia': {'trait': 'haemophilia','cTid1': False,'cTid2': True},
+            'brownEyes': {'trait': 'brownEyes','cTid1': False,'cTid2': True},
+            'maleInfertility': {'trait': 'maleInfertility','cTid1': False,'cTid2': True}
+        }
     ),
     Person(
-        "Kanwal","male",chromosomes = [
-            {'trait': 'haemophilia','cTid1': True,'cTid2': True},
-            {'trait': 'brownEyes','cTid1': True,'cTid2': True},
-            {'trait': 'maleInfertility','cTid1': True,'cTid2': True}
-        ]
+        "Kanwal","male",chromosomes = {
+            'haemophilia': {'trait': 'haemophilia','cTid1': True,'cTid2': True},
+            'brownEyes': {'trait': 'brownEyes','cTid1': True,'cTid2': True},
+            'maleInfertility': {'trait': 'maleInfertility','cTid1': True,'cTid2': True}
+        }
     )
 ]
 
-traits = [
-    Phenotype(
-        name='haemophilia',sexLinked='x',dominant=False,allele='h'
-    ),
-    Phenotype(
-        name='brownEyes',sexLinked=False,dominant=True,allele='b'
-    ),
-    Phenotype(
-        name='maleInfertility',sexLinked='y',dominant=True,allele='i'\
-    )
-]
+traits = {
+    'haemophilia': Phenotype(name='haemophilia',sexLinked='x',dominant=False,allele='h'),
+    'brownEyes': Phenotype(name='brownEyes',sexLinked=False,dominant=True,allele='b'),
+    'maleInfertility': Phenotype(name='maleInfertility',sexLinked='y',dominant=True,allele='i')
+}
 
 for person in people:
     dbi(db,3,"root_object",str(type(person)))
     dbi(db,1,"name",person.name)
     dbi(db,1,"gender",person.gender)
     for chromosome in person.chromosomes:
-        dbi(db,1,str(chromosome['trait']),str(chromosome['cTid1']),str(chromosome['cTid2']))
+        dbi(db,2,str(chromosome))
+        dbi(db,1,str(person.chromosomes[chromosome]))
+        #dbi(db,1,str(chromosome['trait']),str(chromosome['cTid1']),str(chromosome['cTid2']))
 
 
 """
@@ -169,14 +164,14 @@ people.append(tempPerson)
 """
 for trait in traits:
     dbi(db,3,"root_object",str(type(trait)))
-    dbi(db,1,"name",str(trait.name))
-    dbi(db,1,"sexLinked?:",str(trait.sexLinked))
-    dbi(db,1,"dominant?:",str(trait.dominant))
+    dbi(db,2,"name",str(traits[trait].name))
+    dbi(db,2,"sexLinked?:",str(traits[trait].sexLinked))
+    dbi(db,2,"dominant?:",str(traits[trait].dominant))
     
-    print(people[0].testFor(traits[0]))
+    print(traits[trait])
+    print(people[0].testFor(traits[trait]))
     
 for person in people:
     print(str(person.name) + ":")
     for trait in traits:
         print(trait.name,"=",person.testFor(trait),"(",person.calcGenotype(trait.allele),")")
-    print
