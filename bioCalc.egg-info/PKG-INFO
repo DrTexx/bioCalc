@@ -1,6 +1,6 @@
 Metadata-Version: 1.2
 Name: bioCalc
-Version: 0.1b1
+Version: 0.1b3
 Summary: biological calculator
 Home-page: https://github.com/DrTexxOfficial/bioCalc
 Author: Denver Pallis
@@ -9,7 +9,19 @@ License: GPLv3+
 Project-URL: Bug Reports, https://github.com/DrTexxOfficial/bioCalc/issues
 Project-URL: Source, https://github.com/DrTexxOfficial/bioCalc/
 Description-Content-Type: UNKNOWN
-Description: UNKNOWN
+Description: *******
+        bioCalc
+        *******
+        
+        General Information
+        ####################
+        
+        bioCalc is a biological calculator
+        
+        .. image:: /docs/test.png
+            :alt: test
+        
+        
 Keywords: development debugging testing console
 Platform: UNKNOWN
 Classifier: Development Status :: 3 - Alpha
