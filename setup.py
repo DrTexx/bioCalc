@@ -39,7 +39,7 @@ setup(
     # For a discussion on single-sourcing the version across setup.py and the
     # project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.1b3',  # Required
+    version='0.1b4',  # Required
 
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
@@ -67,7 +67,7 @@ setup(
     author='Denver Pallis',  # Optional
     
     # License isn't default in here? Let's fix that.
-    license='GPLv3+', # Optional
+    #license='GPLv3+', # Optional
     
     # python_requires isn't here? Let's fix that.
 #    python_requires='>=3.2',
@@ -96,6 +96,8 @@ setup(
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
@@ -162,11 +164,11 @@ setup(
     #
     # For example, the following would provide a command called `sample` which
     # executes the function `main` from this package when invoked:
-#    entry_points={  # Optional
-#        'console_scripts': [
-#            'sample=sample:main',
-#        ],
-#    },
+    entry_points={  # Optional
+        'console_scripts': [
+            'sample=sample:main',
+        ],
+    },
 
     # List additional URLs that are relevant to your project as a dict.
     #
