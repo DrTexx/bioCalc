@@ -1,8 +1,0 @@
-README.rst
-setup.cfg
-setup.py
-bioCalc.egg-info/PKG-INFO
-bioCalc.egg-info/SOURCES.txt
-bioCalc.egg-info/dependency_links.txt
-bioCalc.egg-info/requires.txt
-bioCalc.egg-info/top_level.txt

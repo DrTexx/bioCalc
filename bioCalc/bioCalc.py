@@ -5,7 +5,7 @@ SCRIPT IS WIP
 r001: 20180321-0131 (CORE CODE WORKS!)
 """
 
-from lib.dbi import dbi # import dbi for debugging
+from bioCalc.lib.dbi import dbi # import dbi for debugging
 db = {'debug_active': True, 'verbosity_level': 2} # dictionary for dbi
 dbi(db,3,"Successfully imported dbi!") # test dbi import
 
@@ -190,15 +190,12 @@ def listTraits():
         dbi(db,1,"trait",str(traits[trait].name),"sexLinked?",str(traits[trait].sexLinked))
         dbi(db,1,"trait",str(traits[trait].name),"dominant?",str(traits[trait].dominant))
         
-listPeople()
-listTraits()
-    
-for person in range(len(people)):
-    for trait in traits:
-        dbi(db,1,"DOES",people[person].name,"HAVE",traits[trait].name,str(people[person].testFor(traits[trait])))
-        #dbi(db,1,people[person].calcGenotype(pass))
-
-# for person in people:
-#     print(str(person.name) + ":")
-#     for trait in traits:
-#         print(trait.name,"=",person.testFor(trait),"(",person.calcGenotype(trait.allele),")")
+def listPersonTestResults():
+    for person in range(len(people)):
+        for trait in traits:
+            dbi(db,1,"DOES",people[person].name,"HAVE",traits[trait].name,str(people[person].testFor(traits[trait])))
+            #dbi(db,1,people[person].calcGenotype(pass))
+            
+#listPeople()
+#listTraits()
+#listPersonTestResults()
