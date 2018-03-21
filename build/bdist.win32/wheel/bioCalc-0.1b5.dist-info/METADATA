@@ -1,4 +1,4 @@
-Metadata-Version: 1.2
+Metadata-Version: 2.0
 Name: bioCalc
 Version: 0.1b5
 Summary: biological calculator
@@ -9,19 +9,6 @@ License: UNKNOWN
 Project-URL: Bug Reports, https://github.com/DrTexxOfficial/bioCalc/issues
 Project-URL: Source, https://github.com/DrTexxOfficial/bioCalc/
 Description-Content-Type: UNKNOWN
-Description: *******
-        bioCalc
-        *******
-        
-        General Information
-        ####################
-        
-        bioCalc is a biological calculator
-        
-        .. image:: /docs/test.png
-            :alt: test
-        
-        
 Keywords: development debugging testing console
 Platform: UNKNOWN
 Classifier: Development Status :: 4 - Beta
@@ -33,3 +20,19 @@ Classifier: Programming Language :: Python :: 3.3
 Classifier: Programming Language :: Python :: 3.4
 Classifier: Programming Language :: Python :: 3.5
 Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: colorama
+
+*******
+bioCalc
+*******
+
+General Information
+####################
+
+bioCalc is a biological calculator
+
+.. image:: /docs/test.png
+    :alt: test
+
+
+
