@@ -9,3 +9,6 @@ bioCalc.egg-info/dependency_links.txt
 bioCalc.egg-info/entry_points.txt
 bioCalc.egg-info/requires.txt
 bioCalc.egg-info/top_level.txt
+bioCalc/lib/__init__.py
+bioCalc/lib/colorThis.py
+bioCalc/lib/dbi.py

@@ -13,6 +13,8 @@ ALL COMMANDS EXECUTED WHILE IN ROOT DIRECTORY
 3. Create a wheel for current version
 python setup.py bdist_wheel
 
+[NOTE!] do not run this command while dropbox sync is active, it will break stuff
+
 4. Upload the wheel to testpypi
 twine upload --repository testpypi dist/*
 
