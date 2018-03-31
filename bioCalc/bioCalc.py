@@ -5,7 +5,7 @@ SCRIPT IS WIP
 r001: 20180321-0131 (CORE CODE WORKS!)
 """
 
-from bioCalc.lib.dbi import dbi # import dbi for debugging
+from dbi.dbi import dbi # import dbi for debugging
 db = {'debug_active': True, 'verbosity_level': 2} # dictionary for dbi
 dbi(db,3,"Successfully imported dbi!") # test dbi import
 

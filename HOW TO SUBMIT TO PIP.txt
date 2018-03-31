@@ -10,6 +10,9 @@ ALL COMMANDS EXECUTED WHILE IN ROOT DIRECTORY
 
 [e.g.]	git tag 0.1b3 -m "improved documentation"
 
+3. Sync local tags to github
+	git push --tags origin master
+
 3. Create a wheel for current version
 python setup.py bdist_wheel
 
