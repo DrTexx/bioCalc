@@ -1,5 +1,5 @@
 *.pyc
-/testenv/*
+/testenv
 /*.egg-info
-/build/*
-/dist/*
+/build
+/dist
