@@ -5,9 +5,11 @@ SCRIPT IS WIP
 r001: 20180321-0131 (CORE CODE WORKS!)
 """
 
-from dbi.dbi import dbi # import dbi for debugging
-db = {'debug_active': True, 'verbosity_level': 2} # dictionary for dbi
-dbi(db,3,"Successfully imported dbi!") # test dbi import
+from dbi.dbi import Dbi # import dbi for debugging
+db = {'debug_active': True, 'verbosity_level': 3} # dictionary for dbi
+dbi = Dbi(db['verbosity_level'], db['debug_active']) # set up dbi
+dpm = dbi.print_message # set up shorthand for printing dbi messages
+dpm(2,"Successfully imported dbi!") # test dbi import
 
 # define the person class
 class Person:
@@ -165,7 +167,7 @@ traits = {
 #    'curlyHair': Phenotype(name='curlyHair',sexLinked=False,dominant=False,allele='c')
 }
 
-#dbi(db,1,str(people[3].testFor(traits['curlyHair'])))
+#dpm(1,str(people[3].testFor(traits['curlyHair'])))
 
 """
 tempName = raw_input("Person's name: ")
@@ -178,23 +180,23 @@ people.append(tempPerson)
 
 def listPeople():
     for person in people:
-        dbi(db,3,"person","root_object",str(type(person)))
-        dbi(db,1,"person",person.name,person.gender)
+        dpm(3,"person","root_object",str(type(person)))
+        dpm(1,"person",person.name,person.gender)
         for chromosome in person.chromosomes:
-            #dbi(db,1,str(chromosome['trait']),str(chromosome['cTid1']),str(chromosome['cTid2']))
-            dbi(db,2,"person",person.name,str(chromosome),str(person.chromosomes[chromosome]))
+            #dpm(1,str(chromosome['trait']),str(chromosome['cTid1']),str(chromosome['cTid2']))
+            dpm(2,"person",person.name,str(chromosome),str(person.chromosomes[chromosome]))
             
 def listTraits():
     for trait in traits:
-        dbi(db,3,"trait","root_object",str(type(traits[trait])))
-        dbi(db,1,"trait",str(traits[trait].name),"sexLinked?",str(traits[trait].sexLinked))
-        dbi(db,1,"trait",str(traits[trait].name),"dominant?",str(traits[trait].dominant))
+        dpm(3,"trait","root_object",str(type(traits[trait])))
+        dpm(1,"trait",str(traits[trait].name),"sexLinked?",str(traits[trait].sexLinked))
+        dpm(1,"trait",str(traits[trait].name),"dominant?",str(traits[trait].dominant))
         
 def listPersonTestResults():
     for person in range(len(people)):
         for trait in traits:
-            dbi(db,1,"DOES",people[person].name,"HAVE",traits[trait].name,str(people[person].testFor(traits[trait])))
-            #dbi(db,1,people[person].calcGenotype(pass))
+            dpm(1,"DOES",people[person].name,"HAVE",traits[trait].name,str(people[person].testFor(traits[trait])))
+            #dpm(1,people[person].calcGenotype(pass))
             
 #listPeople()
 #listTraits()
